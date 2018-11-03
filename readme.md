@@ -17,16 +17,19 @@
   </a>
 </p>
 
-<p align="center"><b>façon</b></p>
+<p align="center"><b>Tiny utility (272B) tc create DOM elements with manner.</b></p>
 
 Manually creating DOM nested elements can be very troublesome and verbose.
 Facon is a tiny utility that makes it easy to create nested DOM elements using template literals and extract references.
-There's no magic nor restrictive template logic. All you get are dom references so that you can do whatever you like and take advantage of the powerful native DOM API.
 
-> TLDR: Fixes the tiring process of creating and assembling nested DOM elements by hand for then later to query for references manually.
 
-**Features (... or the lack of)**
-- Tiny (282B)
+There's no magic nor restrictive template logic. All you get are dom references so that you can do whatever you like and take full advantage of the powerful native DOM API.
+
+
+> **TLDR**: Facon fix the tiring process of creating and assembling nested DOM elements or `.innerHTML` where you later have to query for references manually.
+
+**~~lack of~~ Features**
+- Tiny (272B)
 - Vanilla JS
 - Zero Dependencies
 - Fast
@@ -34,15 +37,15 @@ There's no magic nor restrictive template logic. All you get are dom references 
 
 ## Install
 
+```
+$ npm install facon
+```
+
 This module exposes three module definitions:
 
 * **ES Module**: `dist/facon.mjs`
 * **CommonJS**: `dist/facon.js`
 * **UMD**: `dist/facon.min.js`
-
-```
-$ npm install facon
-```
 
 Include falcon:
 ```js
@@ -50,7 +53,7 @@ Include falcon:
 import f from 'falcon'
 
 // CJS
-const hyperHTML = require('falcon');
+const f = require('falcon');
 ```
 
 The script can also be directly included from [unpkg.com](https://unpkg.com):
@@ -64,23 +67,21 @@ The script can also be directly included from [unpkg.com](https://unpkg.com):
 ```js
 import f from 'facon';
 
-// Create a b DOM element
+// Create a <b> DOM element
 let node = f`<b>Hello World</b>`;
+document.body.appendChild(node);
 
-// Create nested elements
+// Create nested elements, and extract references
 let node = f`
 <div>
   <h1 ref="title">Façon</h1>
   <p ref="body>Create nested DOM elements with manner<p>
 </div>
 `
-
 document.body.appendChild(node);
 
-// collect references
 let {title, body} = node.collect();
 title.textContent = 'Hello World';
-
 ```
 
 
@@ -94,7 +95,7 @@ Construct and returns a DOM `element`.
 The returned `element` have a special `collect` method, 
 used to collect references to all elements with a `ref` attribute.
 
-### collect(options)
+### node.collect(options)
 Returns: `Object`
 
 Method for extracting DOM references. E.g:
