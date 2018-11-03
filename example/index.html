@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Facon</title>
+	</head>
+	<body>
+		<div id="app"></div>	
+    <script type="module">
+      import f from '../src/index.js';
+      
+      let count = 0;
+      const counter = f`
+        <div class='counter'>
+          Count: <span ref='value'>${count}</span>
+          <div class='buttons'>
+            <button ref='increment' id='inc'>+</button>
+            <button ref='decrement' id='dec'>-</button>
+          </div>
+        </div>
+      `;
+
+      const {value, increment, decrement} = counter.collect();
+
+      increment.addEventListener('click', onClick, true);
+      decrement.addEventListener('click', onClick, true);
+
+      function onClick() {
+        count += this.id === 'inc' ? 1 : -1;
+        value.textContent = count;
+      }
+
+      document.body.appendChild(counter);
+    </script>	
+	</body>
+</html>

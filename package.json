@@ -1,0 +1,42 @@
+{
+  "name": "facon",
+  "version": "1.0.0",
+  "repository": "terkelg/facon",
+  "description": "Create DOM elements with manner",
+  "main": "dist/facon.js",
+  "module": "dist/facon.mjs",
+  "browser": "dist/facon.min.mjs",
+  "unpkg": "dist/facon.min.js",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node builder",
+    "pretest": "npm run build",
+    "prepublishOnly": "npm run build",
+    "test": "tape test/*.js | tap-spec"
+  },
+  "keywords": [
+    "dom",
+    "view",
+    "html",
+    "string",
+    "utility",
+    "builder",
+    "element",
+    "factory",
+    "literals",
+    "template",
+    "template-literals"
+  ],
+  "devDependencies": {
+    "gzip-size": "^5.0.0",
+    "jsdom": "^13.0.0",
+    "mkdirplz": "0.0.2",
+    "pretty-bytes": "^5.1.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1",
+    "terser": "^3.10.9"
+  }
+}
