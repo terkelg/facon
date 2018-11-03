@@ -58,7 +58,7 @@ const f = require('falcon');
 
 The script can also be directly included from [unpkg.com](https://unpkg.com):
 ```html
-<script src="https://unpkg.com/falcon"></script>
+<script src="https://unpkg.com/facon"></script>
 ```
 
 
