@@ -47,13 +47,13 @@ This module exposes three module definitions:
 * **CommonJS**: `dist/facon.js`
 * **UMD**: `dist/facon.min.js`
 
-Include falcon:
+Include facon:
 ```js
 // ES6
-import f from 'falcon'
+import f from 'facon'
 
 // CJS
-const f = require('falcon');
+const f = require('facon');
 ```
 
 The script can also be directly included from [unpkg.com](https://unpkg.com):
