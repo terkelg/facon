@@ -13,8 +13,12 @@ export default function h(strings, ...args) {
     return [...refElements].reduce((acc, element) => {
       const propName = element.getAttribute(attr).trim();
       !keepAttribute && (element.removeAttribute(attr));
-      acc[propName] = element;
-      return acc;
+      acc[propName] = acc[propName]
+      ? Array.isArray(acc[propName])
+        ? [...acc[propName], element]
+        : [acc[propName], element]
+      : element;
+    return acc;
     }, assign);
   }
 
