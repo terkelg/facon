@@ -17,7 +17,7 @@
   </a>
 </p>
 
-<p align="center"><b>Tiny utility (272B) tc create DOM elements with manner.</b></p>
+<p align="center"><b>Tiny utility (301B) tc create DOM elements with manner.</b></p>
 
 Manually creating DOM nested elements can be very troublesome and verbose.
 Facon is a tiny utility that makes it easy to create nested DOM elements using template literals and extract references.
@@ -29,7 +29,7 @@ There's no magic nor restrictive template logic. All you get are dom references 
 > **TLDR**: Facon fix the tiring process of creating and assembling nested DOM elements or `.innerHTML` where you later have to query for references manually.
 
 **~~lack of~~ Features**
-- Tiny (272B)
+- Tiny (301B)
 - Vanilla JS
 - Zero Dependencies
 - Fast
@@ -77,7 +77,7 @@ let node = f`
   <h1 ref="title">Façon</h1>
   <p ref="body>Create nested DOM elements with manner<p>
 </div>
-`
+`;
 document.body.appendChild(node);
 
 let {title, body} = node.collect();
@@ -92,8 +92,7 @@ Returns: `Element`
 
 Construct and returns a DOM `element`.
 
-The returned `element` have a special `collect` method, 
-used to collect references to all elements with a `ref` attribute.
+The returned `element` has a special `collect` method used to collect references to all elements with a `ref` attribute. Multiple elements containing identical `ref` attribute values result in an array of DOM references.
 
 ### node.collect(options)
 Returns: `Object`
@@ -101,9 +100,20 @@ Returns: `Object`
 Method for extracting DOM references. E.g:
 
 ```js
-const node = f`<div><b ref='bold'>Hello World</b></div>`;
-let {bold} = node.collect();
-// ~> bold is a dom reference to the inner <b> element 
+const node = f`
+  <div>
+    <h1 ref="title">Hello world!</h1>
+    <ul ref="list">
+      <li ref="items">One</li>
+      <li ref="items">Two</li>
+      <li ref="items">Three</li>
+    </ul>
+  <div>
+`;
+let {title, list, items} = node.collect();
+// ~> title is a dom reference to the inner h1 element.
+// ~> list is a dom reference to the inner ul element.
+// ~> items is an array of dom references to each li element.
 // ~> node is by default the outer most element.
 ```
 
@@ -143,7 +153,7 @@ class MyElement extends Component {
 
     update() {
       this.title = 'Hello World';
-      this.body = 'tesst';
+      this.body = 'test';
     }
 }
 ```
