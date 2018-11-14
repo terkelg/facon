@@ -34,16 +34,35 @@ test('facon: collect', async t => {
   t.is(s(el), '<span>hello</span>');
 });
 
+test('facon: collect - array', async t => {
+  t.plan(5);
+  let el = f`<ul ref='list'><li ref='item'>0</li><li ref='item'>1</li><li ref='item'>2</li></ul>`;
+  let obj = el.collect();
+  t.is('list' in obj, true);
+  t.is('item' in obj, true);
+  t.is(s(el), '<ul><li>0</li><li>1</li><li>2</li></ul>');
+  t.is(Array.isArray(obj.item), true);
+  t.is(obj.item.every((x, i) => s(x) === `<li>${i}</li>`), true);
+});
+
 test('facon: collect - keep attribute', async t => {
-  t.plan(2);
+  t.plan(7);
   let el = f`<span ref='test'>hello</span>`;
   let obj = el.collect({keepAttribute:true});
   t.is('test' in obj, true);
   t.is(s(el), `<span ref="test">hello</span>`);
+
+  el = f`<ul ref='list'><li ref='item'>0</li><li ref='item'>1</li><li ref='item'>2</li></ul>`;
+  obj = el.collect({keepAttribute:true});
+  t.is('list' in obj, true);
+  t.is('item' in obj, true);
+  t.is(s(el), `<ul ref="list"><li ref="item">0</li><li ref="item">1</li><li ref="item">2</li></ul>`);
+  t.is(Array.isArray(obj.item), true);
+  t.is(obj.item.every((x, i) => s(x) === `<li ref="item">${i}</li>`), true);
 });
 
 test('facon: collect - custom attribute', async t => {
-  t.plan(4);
+  t.plan(14);
   let el = f`<span lol='test'>hello</span>`;
   let obj = el.collect({attr:'lol'});
   t.is('test' in obj, true);
@@ -53,13 +72,37 @@ test('facon: collect - custom attribute', async t => {
   obj = el.collect({attr:'lol', keepAttribute:true});
   t.is('test' in obj, true);
   t.is(s(el), `<span lol="test">hello</span>`);
+
+  el = f`<ul lol='list'><li lol='item'>0</li><li lol='item'>1</li><li lol='item'>2</li></ul>`;
+  obj = el.collect({attr:'lol'});
+  t.is('list' in obj, true);
+  t.is('item' in obj, true);
+  t.is(s(el), `<ul><li>0</li><li>1</li><li>2</li></ul>`);
+  t.is(Array.isArray(obj.item), true);
+  t.is(obj.item.every((x, i) => s(x) === `<li>${i}</li>`), true);
+
+  el = f`<ul lol='list'><li lol='item'>0</li><li lol='item'>1</li><li lol='item'>2</li></ul>`;
+  obj = el.collect({attr:'lol', keepAttribute:true});
+  t.is('list' in obj, true);
+  t.is('item' in obj, true);
+  t.is(s(el), `<ul lol="list"><li lol="item">0</li><li lol="item">1</li><li lol="item">2</li></ul>`);
+  t.is(Array.isArray(obj.item), true);
+  t.is(obj.item.every((x, i) => s(x) === `<li lol="item">${i}</li>`), true);
 });
 
 test('facon: collect - assign', async t => {
-  t.plan(2);
+  t.plan(7);
   let el = f`<span ref='test'>hello</span>`;
   let assign = {};
   let obj = el.collect({assign});
   t.is('test' in assign, true);
   t.is(s(el), `<span>hello</span>`);
+
+  el = f`<ul ref='list'><li ref='item'>0</li><li ref='item'>1</li><li ref='item'>2</li></ul>`;
+  obj = el.collect({assign});
+  t.is('list' in assign, true);
+  t.is('item' in assign, true);
+  t.is(s(el), `<ul><li>0</li><li>1</li><li>2</li></ul>`);
+  t.is(Array.isArray(assign.item), true);
+  t.is(assign.item.every((x, i) => s(x) === `<li>${i}</li>`), true);
 });
