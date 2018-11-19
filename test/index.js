@@ -15,7 +15,7 @@ const s = el => {
 
 test('facon: standard', async t => {
   t.plan(1);
-  t.is(typeof f, 'function', 'consturctor is a typeof function');
+  t.is(typeof f, 'function', 'constructor is a typeof function');
 });
 
 test('facon: build element', async t => {
@@ -90,19 +90,19 @@ test('facon: collect - custom attribute', async t => {
   t.is(obj.item.every((x, i) => s(x) === `<li lol="item">${i}</li>`), true);
 });
 
-test('facon: collect - assign', async t => {
+test('facon: collect - to', async t => {
   t.plan(7);
   let el = f`<span ref='test'>hello</span>`;
-  let assign = {};
-  let obj = el.collect({assign});
-  t.is('test' in assign, true);
+  let to = {};
+  let obj = el.collect({to});
+  t.is('test' in to, true);
   t.is(s(el), `<span>hello</span>`);
 
   el = f`<ul ref='list'><li ref='item'>0</li><li ref='item'>1</li><li ref='item'>2</li></ul>`;
-  obj = el.collect({assign});
-  t.is('list' in assign, true);
-  t.is('item' in assign, true);
+  obj = el.collect({to});
+  t.is('list' in to, true);
+  t.is('item' in to, true);
   t.is(s(el), `<ul><li>0</li><li>1</li><li>2</li></ul>`);
-  t.is(Array.isArray(assign.item), true);
-  t.is(assign.item.every((x, i) => s(x) === `<li>${i}</li>`), true);
+  t.is(Array.isArray(to.item), true);
+  t.is(to.item.every((x, i) => s(x) === `<li>${i}</li>`), true);
 });
