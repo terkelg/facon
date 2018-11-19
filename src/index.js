@@ -8,7 +8,7 @@ export default function h(strings, ...args) {
 
   const content = template.content;
 
-  content.collect = ({attr = 'ref', keepAttribute, assign = {}} = {}) => {
+  content.collect = ({attr = 'ref', keepAttribute, to = {}} = {}) => {
     const refElements = content.querySelectorAll(`[${attr}]`);
     return [...refElements].reduce((acc, element) => {
       const propName = element.getAttribute(attr).trim();
@@ -19,7 +19,7 @@ export default function h(strings, ...args) {
         : [acc[propName], element]
       : element;
     return acc;
-    }, assign);
+    }, to);
   }
 
   return content;

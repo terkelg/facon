@@ -17,7 +17,7 @@
   </a>
 </p>
 
-<p align="center"><b>Tiny utility (301B) tc create DOM elements with manner.</b></p>
+<p align="center"><b>Tiny utility (297B) tc create DOM elements with manner.</b></p>
 
 Manually creating DOM nested elements can be very troublesome and verbose.
 Facon is a tiny utility that makes it easy to create nested DOM elements using template literals and extract references.
@@ -29,7 +29,7 @@ There's no magic nor restrictive template logic. All you get are dom references 
 > **TLDR**: Facon fix the tiring process of creating and assembling nested DOM elements or `.innerHTML` where you later have to query for references manually.
 
 **~~lack of~~ Features**
-- Tiny (301B)
+- Tiny (297B)
 - Vanilla JS
 - Zero Dependencies
 - Fast
