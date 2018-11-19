@@ -129,7 +129,7 @@ Default: `false`
 
 Keep `ref` attributes on elements after collecting the references. Defaults to `false`.
 
-#### options.assign
+#### options.to
 Type: `Object`<br>
 Default: `{}`
 
@@ -146,7 +146,7 @@ class MyElement extends Component {
           <p ref="body>Create nested DOM elements with manner<p>
         </div>       
       `;
-      view.collect({assign:this});
+      view.collect({to:this});
     }
 
     // later ...
