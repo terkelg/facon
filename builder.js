@@ -14,30 +14,17 @@ mkdir('dist').then(() => {
 	// Copy as is for ESM
 	fs.writeFileSync(pkg.module, data);
 
+	// Mutate exports for CJS
+	data = data.replace(/export default/, 'module.exports =');
+	fs.writeFileSync(pkg.main, data);
+
 	// Minify & print gzip-size
 	let { code } = minify(data, { toplevel:true });
 	console.log(`> gzip size: ${pretty(sizer.sync(code))}`);
 
-	let keys = [];
-	// Mutate exports for CJS
-	data = data.replace(/export default function\s?(.+?)(?=\()/gi, (_, x) => {
-		return keys.push(x) && `function ${x}`;
-	});
-	keys.sort().forEach(key => {
-		data += `\nmodule.exports = ${key};`;
-	});
-
-	fs.writeFileSync(pkg.main, data + '\n');
-
 	// Write UMD bundle
-	let UMD = minify(`
-	(function (global, factory) {
-		typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-		typeof define === 'function' && define.amd ? define(['exports'], factory) :
-		(factory((global.${pkg.name} = {})));
-	}(this, (function (exports) {
-		${data}
-	})));`);
-
-	fs.writeFileSync(pkg.unpkg, UMD.code);
+	let name = pkg.name;
+	let UMD = `!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.${name}=t()}(this,function(){`;
+	UMD += code.replace(/module.exports=/, 'return ') + '});';
+	fs.writeFileSync(pkg.unpkg, UMD);
 });
