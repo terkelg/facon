@@ -75,7 +75,7 @@ document.body.appendChild(node);
 let node = f`
 <div>
   <h1 ref="title">Façon</h1>
-  <p ref="body>Create nested DOM elements with manner<p>
+  <p ref="body">Create nested DOM elements with manner<p>
 </div>
 `;
 document.body.appendChild(node);
