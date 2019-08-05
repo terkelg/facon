@@ -1,6 +1,6 @@
 {
   "name": "facon",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "repository": "terkelg/facon",
   "description": "Create DOM elements with manner",
   "main": "dist/facon.js",
