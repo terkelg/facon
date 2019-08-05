@@ -82,6 +82,10 @@ document.body.appendChild(node);
 
 let {title, body} = node.collect();
 title.textContent = 'Hello World';
+
+// DOM node appends
+let child = f`<b>Hello World</b>;
+let parent = f`<div>${child}</div>;
 ```
 
 
@@ -138,13 +142,13 @@ Optional object reference to assign to.
 This can be handy if you have a component and want to be able to access references trough `this`. E.g:
 ```js
 class MyElement extends Component {
-    
+
     view() {
       const view = f`
         <div>
           <h1 ref="title">Façon</h1>
           <p ref="body>Create nested DOM elements with manner<p>
-        </div>       
+        </div>
       `;
       view.collect({to:this});
     }
