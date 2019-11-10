@@ -6,12 +6,12 @@
   <a href="https://npmjs.org/package/facon">
     <img src="https://badgen.now.sh/npm/v/facon" alt="version" />
   </a>
-  <a href="https://travis-ci.org/terkelg/facon">
-    <img src="https://badgen.now.sh/travis/terkelg/facon" alt="travis" />
+  <a href="https://codecov.io/gh/terkelg/facon">
+    <img src="https://badgen.now.sh/codecov/c/github/terkelg/facon" alt="codecov" />
   </a>
-  <a href="https://npmjs.org/package/facon">
+  <!--<a href="https://npmjs.org/package/facon">
     <img src="https://badgen.now.sh/npm/dm/facon" alt="downloads" />
-  </a>
+  </a>-->
   <a href="https://packagephobia.now.sh/result?p=facon">
     <img src="https://packagephobia.now.sh/badge?p=facon" alt="install size" />
   </a>
@@ -96,7 +96,19 @@ Returns: `Element`
 
 Construct and returns a DOM `element`.
 
-The returned `element` has a special `collect` method used to collect references to all elements with a `ref` attribute. Multiple elements containing identical `ref` attribute values result in an array of DOM references.
+The returned `element` has a special `collect` method that is used to collect references to all elements with a `ref` attribute. Multiple elements containing identical `ref` attribute values result in an array of DOM references.
+
+DOM Elements can be composed together/appended like this:
+
+```js
+let myNode = document.createElement('div');
+let node = f`<div>${myNode}</div>;
+
+// or this way
+let myNode = document.createElement('div');
+let node = f`<div>${myNode}</div>;
+```
+
 
 ### node.collect(options)
 Returns: `Object`

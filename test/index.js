@@ -1,6 +1,6 @@
-const test = require('tape');
-const f = require('../dist/facon.js');
-const { JSDOM } = require('jsdom');
+import f  from '../src';
+import test from 'tape';
+import { JSDOM } from 'jsdom';
 
 const { window } = new JSDOM(`...`);
 global.document = window.document;

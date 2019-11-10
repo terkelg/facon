@@ -15,7 +15,7 @@
     "build": "node builder",
     "pretest": "npm run build",
     "prepublishOnly": "npm run build",
-    "test": "tape test/*.js | tap-spec"
+    "test": "tape -r esm test/*.js | tap-spec"
   },
   "keywords": [
     "dom",
@@ -31,6 +31,7 @@
     "template-literals"
   ],
   "devDependencies": {
+    "esm": "^3.2.25",
     "gzip-size": "^5.1.1",
     "jsdom": "^15.2.1",
     "mkdirplz": "1.0.1",
