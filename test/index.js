@@ -1,9 +1,10 @@
 const test = require('tape');
 const f = require('../dist/facon.js');
-const {JSDOM} = require('jsdom');
+const { JSDOM } = require('jsdom');
 
 const { window } = new JSDOM(`...`);
 global.document = window.document;
+global.HTMLElement = window.HTMLElement;
 
 let parent = document.createElement('div');
 
@@ -105,4 +106,11 @@ test('facon: collect - to', async t => {
   t.is(s(el), `<ul><li>0</li><li>1</li><li>2</li></ul>`);
   t.is(Array.isArray(to.item), true);
   t.is(to.item.every((x, i) => s(x) === `<li>${i}</li>`), true);
+});
+
+test('facon: append', async t => {
+  let myNode = window.document.createElement('div');
+  let el = f`<div>${myNode}</div>`;
+  t.is(s(el), `<div><div></div></div>`);
+  t.end();
 });
