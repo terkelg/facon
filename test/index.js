@@ -92,15 +92,16 @@ test('facon: collect - custom attribute', async t => {
 });
 
 test('facon: collect - to', async t => {
-  t.plan(7);
+  t.plan(8);
   let el = f`<span ref='test'>hello</span>`;
   let to = {};
-  let obj = el.collect({to});
+  el.collect({to});
   t.is('test' in to, true);
   t.is(s(el), `<span>hello</span>`);
 
   el = f`<ul ref='list'><li ref='item'>0</li><li ref='item'>1</li><li ref='item'>2</li></ul>`;
-  obj = el.collect({to});
+  let obj = el.collect({to});
+  t.deepEqual(obj, to);
   t.is('list' in to, true);
   t.is('item' in to, true);
   t.is(s(el), `<ul><li>0</li><li>1</li><li>2</li></ul>`);
@@ -108,9 +109,31 @@ test('facon: collect - to', async t => {
   t.is(to.item.every((x, i) => s(x) === `<li>${i}</li>`), true);
 });
 
-test('facon: append', async t => {
-  let myNode = window.document.createElement('div');
-  let el = f`<div>${myNode}</div>`;
+test('facon: append element', async t => {
+  let node = window.document.createElement('div');
+  let el = f`<div>${node}</div>`;
   t.is(s(el), `<div><div></div></div>`);
+  t.end();
+});
+
+test('facon: append string', async t => {
+  let str = 'Hello';
+  let el = f`<div>${str}</div>`;
+  t.is(s(el), `<div>Hello</div>`);
+  t.end();
+});
+
+test('facon: append number', async t => {
+  let number = 0;
+  let el = f`<div>${number}</div>`;
+  t.is(s(el), `<div>0</div>`);
+  t.end();
+});
+
+test('facon: append multiple', async t => {
+  let number = 0;
+  let string = 'Hello';
+  let el = f`<div>${number} - ${string}</div>`;
+  t.is(s(el), `<div>0 - Hello</div>`);
   t.end();
 });
