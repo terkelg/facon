@@ -3,7 +3,7 @@ export default function h(strings, ...args) {
   const appends = {};
   for (let i = 0; i < args.length; i++) {
     if (args[i] instanceof HTMLElement) {
-      const id = 'id' + i;
+      const id = `id${i}`;
       appends[id] = args[i];
       result += `${strings[i]}<div append="${id}"></div>`;
     } else {
