@@ -137,3 +137,26 @@ test('facon: append multiple', async t => {
   t.is(s(el), `<div>0 - Hello</div>`);
   t.end();
 });
+
+test('facon: example', async t => {
+  let count = 0;
+  const counter = f`
+    <div class='counter'>
+      Count: <span ref='value'>${count}</span>
+      <div class='buttons'>
+        <button ref='increment' id='inc'>+</button>
+        <button ref='decrement' id='dec'>-</button>
+      </div>
+    </div>
+  `;
+  const {value, increment, decrement} = counter.collect();
+  t.is(counter.nodeType, 11);
+  t.is(value.nodeType, 1);
+  t.is(increment.nodeType, 1);
+  t.is(decrement.nodeType, 1);
+  t.end();
+});
+
+
+
+
