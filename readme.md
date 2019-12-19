@@ -102,7 +102,7 @@ DOM Elements can be composed together/appended like this:
 
 ```js
 let myNode = document.createElement('div');
-let node = f`<div>${myNode}</div>;
+let node = f`<div>${myNode}</div>`;
 
 // or this way
 let myNode = document.createElement('div');
