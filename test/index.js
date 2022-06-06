@@ -157,6 +157,17 @@ test('facon: example', async t => {
   t.end();
 });
 
+test('facon: supports event listeners', async t => {
+  let clicked = 0;
+  const onClick = () => ++clicked;
+  const el = f`<button @click="${onClick}" ref="test">hello</button>`;
+  const { test } = el.collect();
+  test.click();
+  t.is(clicked, 1);
+  t.end();
+});
+
+
 
 
 
