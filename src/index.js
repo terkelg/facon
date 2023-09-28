@@ -1,25 +1,16 @@
 export default function h(strings, ...args) {
-  let result = ``;
-  const appends = {};
-  for (let i = 0; i < args.length; i++) {
-    if (args[i] instanceof HTMLElement) {
-      const id = `id${i}`;
-      appends[id] = args[i];
-      result += `${strings[i]}<div append="${id}"></div>`;
-    } else {
-      result += strings[i] + args[i];
-    }
-  }
-  result += strings[strings.length - 1];
-
   const template = document.createElement(`template`);
-  template.innerHTML = result;
+
+  template.innerHTML = args.reduce((prev, value, i) => {
+    return prev +
+      (value instanceof HTMLElement ? `<b append=${i}></b>` : value) +
+      strings[i + 1]
+  }, strings[0]);
 
   const content = template.content;
 
   [...content.querySelectorAll(`[append]`)].forEach(refNode => {
-    const newNode = appends[refNode.getAttribute('append')];
-    refNode.parentNode.insertBefore(newNode, refNode);
+    refNode.parentNode.insertBefore(args[refNode.getAttribute('append')], refNode);
     refNode.parentNode.removeChild(refNode);
   });
 
