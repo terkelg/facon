@@ -19,6 +19,11 @@ test('facon: standard', async t => {
   t.is(typeof f, 'function', 'constructor is a typeof function');
 });
 
+test('facon: empty string', async t => {
+  t.plan(1);
+  t.is(s(f``), '');
+});
+
 test('facon: build element', async t => {
   t.plan(4);
   t.is(s(f`hello`), 'hello');
