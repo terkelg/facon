@@ -8,7 +8,7 @@ export default function h(strings, ...args) {
 
   const content = template.content;
 
-  [...content.querySelectorAll(`[append]`)].forEach(refNode => {
+  content.querySelectorAll(`[append]`).forEach(refNode => {
     refNode.parentNode.insertBefore(args[refNode.getAttribute('append')], refNode);
     refNode.parentNode.removeChild(refNode);
   });
