@@ -1,11 +1,10 @@
 export default function h(strings, ...args) {
   const template = document.createElement(`template`);
 
-  template.innerHTML = args.reduce((prev, value, i) => {
-    return prev +
-      (value instanceof HTMLElement ? `<b append=${i}></b>` : value) +
-      strings[i + 1]
-  }, strings[0]);
+  template.innerHTML = args.reduce((prev, value, i) =>
+    prev + (value instanceof HTMLElement ? `<b append=${i}></b>` : value) + strings[i + 1],
+    strings[0]
+  );
 
   const content = template.content;
 
