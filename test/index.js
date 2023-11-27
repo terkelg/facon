@@ -19,6 +19,16 @@ test('facon: standard', async t => {
   t.is(typeof f, 'function', 'constructor is a typeof function');
 });
 
+test('facon: awkward boundary conditions', async t => {
+  t.plan(5);
+  let subst = 100;
+  t.is(s(f``), '', 'empty string');
+  t.is(s(f`${subst}`), '100', 'just arg');
+  t.is(s(f`${subst}left`), '100left', 'arg on far left');
+  t.is(s(f`right${subst}`), 'right100', 'arg on far right');
+  t.is(s(f`${subst}mid${subst}`), '100mid100', 'args on either end')
+});
+
 test('facon: build element', async t => {
   t.plan(4);
   t.is(s(f`hello`), 'hello');
