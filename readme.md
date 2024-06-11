@@ -23,10 +23,10 @@ Manually creating DOM nested elements can be very troublesome and verbose.
 Facon is a tiny utility that makes it easy to create nested DOM elements using template literals and extract references.
 
 
-There's no magic nor restrictive template logic. All you get are dom references so that you can do whatever you like and take full advantage of the powerful native DOM API.
+There's no magic nor restrictive template logic. All you get are DOM references so that you can do whatever you like and take full advantage of the powerful native DOM API.
 
 
-> **TLDR**: Facon fix the tiring process of creating and assembling nested DOM elements or `.innerHTML` where you later have to query for references manually.
+> **TLDR**: Facon fixes the tiring process of creating and assembling nested DOM elements or `.innerHTML` where you later have to query for references manually.
 
 **~~lack of~~ Features**
 - Tiny (365 bytes gzipped)
@@ -75,7 +75,7 @@ document.body.appendChild(node);
 let node = f`
 <div>
   <h1 ref="title">Façon</h1>
-  <p ref="body">Create nested DOM elements with manner<p>
+  <p ref="body">Create nested DOM elements with manner</p>
 </div>
 `;
 document.body.appendChild(node);
@@ -84,8 +84,8 @@ let {title, body} = node.collect();
 title.textContent = 'Hello World';
 
 // DOM node appends
-let child = f`<b>Hello World</b>;
-let parent = f`<div>${child}</div>;
+let child = f`<b>Hello World</b>`;
+let parent = f`<div>${child}</div>`;
 ```
 
 
@@ -106,7 +106,7 @@ let node = f`<div>${myNode}</div>`;
 
 // or this way
 let myNode = document.createElement('div');
-let node = f`<div>${myNode}</div>;
+let node = f`<div>${myNode}</div>`;
 ```
 
 
@@ -151,7 +151,7 @@ Default: `{}`
 
 Optional object reference to assign to.
 
-This can be handy if you have a component and want to be able to access references trough `this`. E.g:
+This can be handy if you have a component and want to be able to access references through `this`. E.g:
 ```js
 class MyElement extends Component {
 
@@ -159,7 +159,7 @@ class MyElement extends Component {
       const view = f`
         <div>
           <h1 ref="title">Façon</h1>
-          <p ref="body>Create nested DOM elements with manner<p>
+          <p ref="body">Create nested DOM elements with manner</p>
         </div>
       `;
       view.collect({to:this});
