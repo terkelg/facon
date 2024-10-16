@@ -101,7 +101,7 @@ The returned `element` has a special `collect` method that is used to collect re
 DOM Elements can be composed together/appended like this:
 
 ```js
-let myNode = document.createElement('div');
+let myNode = f`<b>Hello World</b>`;
 let node = f`<div>${myNode}</div>`;
 
 // or this way
